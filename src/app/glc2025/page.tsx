@@ -6,7 +6,6 @@ import { Autoplay } from "swiper/modules";
 import SpeakerCard from "@/components/SpeakerCard";
 import { useEffect, useRef, useState } from "react";
 import { speakerData } from "@/utils/data";
-import { Document, Page, pdfjs } from 'react-pdf'
 import { useInView } from "framer-motion";
 import AnimatedTextCharacter from "@/components/AnimatedTextCharacter";
 import PanelDiscussion from "@/components/Glc2024/PanelDiscussion";
@@ -20,7 +19,6 @@ import Learning from "@/components/Glc2024/Learning";
 import WorkshopCTA from "@/components/Glc2024/JoinWorkshop";
 import Gcc from "@/components/Glc2024/Gcc";
 import WorkshopHighlightsLatest from "@/components/Glc2024/WorkshopHighlightsLatest";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 export default function Home() {
   const [swiper, setSwiper] = useState(null);
@@ -42,11 +40,7 @@ export default function Home() {
       }
     }
   }, [isInView, swiper]);
-  const [numPages, setNumPages] = useState(null);
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
 
   return (
     <main
@@ -153,9 +147,8 @@ export default function Home() {
               onClick={() => {
                 setShowSpeakers(speakerData.filter((item) => !item?.blank));
               }}
-              className={`${
-                speakerData.length === showSpeakers.length ? "hidden" : "block"
-              } uppercase lg:hidden border-[2px] border-[#F26C21] text-[#F26C21] px-8 py-3 font-helvetica font-bold mt-8 mx-auto`}
+              className={`${speakerData.length === showSpeakers.length ? "hidden" : "block"
+                } uppercase lg:hidden border-[2px] border-[#F26C21] text-[#F26C21] px-8 py-3 font-helvetica font-bold mt-8 mx-auto`}
             >
               View more
             </button>
